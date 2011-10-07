@@ -1,5 +1,8 @@
 package com.ksmpartners.tlswriter;
 
+import java.util.List;
+import java.util.LinkedList;
+
 import java.io.PrintStream;
 
 import org.slf4j.Logger;
@@ -9,13 +12,18 @@ public class App
 {
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
+    public static int COUNT_THREADS = 4;
+    public static int COUNT_ITERS = 1000;
+
     public static Thread startWriter(final int id,
                                      final PrintStream out)
     {
         Thread th = new Thread() {
                 public void run() {
-                    for(int ii = 0; ii < 1000; ii++)
-                        out.println(id);
+                    for(int ii = 0; ii < COUNT_ITERS; ii++) {
+                        out.print(id);
+                        out.println(" ********************************");
+                    }
                 };
             };
 
@@ -24,10 +32,28 @@ public class App
         return th;
     }
 
+    public static void joinAll(List<Thread> threads)
+        throws InterruptedException
+    {
+        for(Thread th: threads)
+            th.join();
+    }
+
+    public static void go()
+        throws Exception
+    {
+        List<Thread> threads = new LinkedList<Thread>();
+
+        for(int ii = 0; ii < COUNT_THREADS; ii++)
+            threads.add(startWriter(ii, System.out));
+
+        joinAll(threads);
+    }
+
     public static void main( String[] args )
     {
         try {
-            startWriter(1, System.out).join();
+            go();
         } catch(Throwable th) {
             log.error("Uncaught error.", th);
         }
