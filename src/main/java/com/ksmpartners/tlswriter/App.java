@@ -12,8 +12,9 @@ public class App
 {
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
-    public static int COUNT_THREADS = 4;
+    public static int COUNT_THREADS = 8;
     public static int COUNT_ITERS = 1000;
+    public static int COUNT_BLOCKS = 8;
 
     public static Thread startWriter(final int id,
                                      final PrintStream out)
@@ -22,7 +23,10 @@ public class App
                 public void run() {
                     for(int ii = 0; ii < COUNT_ITERS; ii++) {
                         out.print(id);
-                        out.println(" ********************************");
+                        out.print(" ");
+                        for(int jj = 0; jj < COUNT_BLOCKS; jj++)
+                            out.print("****");
+                        out.println();
                     }
                 };
             };
