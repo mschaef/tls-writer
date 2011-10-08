@@ -56,7 +56,7 @@ public class ConcurrentLineStream
     public void write(int b)
         throws IOException
     {
-        buf.get().append(b);
+        buf.get().append((char)b);
 
         if (b == (int)'\n')
             flush();
