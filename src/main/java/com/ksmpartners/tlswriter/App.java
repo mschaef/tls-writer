@@ -24,6 +24,8 @@ public class App
                     for(int ii = 0; ii < COUNT_ITERS; ii++) {
                         out.print(id);
                         out.print(" ");
+                        out.print(ii);
+                        out.print(" ");
                         for(int jj = 0; jj < COUNT_BLOCKS; jj++)
                             out.print("****");
                         out.println();
