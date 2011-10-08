@@ -6,14 +6,9 @@ import java.util.LinkedList;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class ConcurrentLineStream
     extends OutputStream
 {
-    private static final Logger log =
-        LoggerFactory.getLogger(ConcurrentLineStream.class);
 
     private static List<StringBuffer> threadLineBuffers =
         new LinkedList<StringBuffer>();
