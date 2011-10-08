@@ -12,7 +12,7 @@ public class App
 {
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
-    public static int COUNT_THREADS = 8;
+    public static int COUNT_THREADS = 4;
     public static int COUNT_ITERS = 1000;
     public static int COUNT_BLOCKS = 8;
 
