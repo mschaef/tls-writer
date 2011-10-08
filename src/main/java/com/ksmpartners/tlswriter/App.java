@@ -45,6 +45,8 @@ public class App
             th.join();
     }
 
+    protected static boolean safeMode = true;
+
     public static void go()
         throws Exception
     {
@@ -52,7 +54,8 @@ public class App
 
         PrintStream out = System.out;
 
-        out = new PrintStream(new ConcurrentLineStream(out));
+        if (safeMode)
+            out = new PrintStream(new ConcurrentLineStream(out));
 
         for(int ii = 0; ii < COUNT_THREADS; ii++)
             threads.add(startWriter(ii, out));
@@ -63,6 +66,9 @@ public class App
     public static void main( String[] args )
     {
         try {
+            if ((args.length == 1) && ("--unsafe".equals(args[0])))
+                safeMode = false;
+
             go();
         } catch(Throwable th) {
             log.error("Uncaught error.", th);
