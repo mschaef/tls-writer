@@ -48,8 +48,12 @@ public class App
     {
         List<Thread> threads = new LinkedList<Thread>();
 
+        PrintStream out = System.out;
+
+        out = new PrintStream(new ConcurrentLineStream(out));
+
         for(int ii = 0; ii < COUNT_THREADS; ii++)
-            threads.add(startWriter(ii, System.out));
+            threads.add(startWriter(ii, out));
 
         joinAll(threads);
     }
