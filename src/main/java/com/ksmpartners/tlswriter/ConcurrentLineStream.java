@@ -9,8 +9,7 @@ import java.io.OutputStream;
 public class ConcurrentLineStream
     extends OutputStream
 {
-
-    private static List<StringBuffer> threadLineBuffers =
+    private List<StringBuffer> threadLineBuffers =
         new LinkedList<StringBuffer>();
 
     ThreadLocal<StringBuffer> buf = new ThreadLocal<StringBuffer>() {
